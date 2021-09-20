@@ -3665,7 +3665,7 @@ type
 
 type
   CXCursorVisitor* = proc (cursor: CXCursor; parent: CXCursor;
-                        client_data: CXClientData): CXChildVisitResult
+                        client_data: CXClientData): CXChildVisitResult {.cdecl.}
 
 
 ## *
@@ -5515,7 +5515,7 @@ type                          ## *
     ##
   CXCursorAndRangeVisitor* {.bycopy.} = object
     context*: pointer
-    visit*: proc (context: pointer; a2: CXCursor; a3: CXSourceRange): CXVisitorResult
+    visit*: proc (context: pointer; a2: CXCursor; a3: CXSourceRange): CXVisitorResult {.cdecl.}
 
   CXResult* {.size: sizeof(cint).} = enum
     CXResult_Success = 0, ## *
@@ -5867,7 +5867,7 @@ type
                           reserved: pointer): CXIdxClientFile ## *
                                                            ##  Called when a file gets \#included/\#imported.
                                                            ##
-    ppIncludedFile*: proc (client_data: CXClientData; a2: ptr CXIdxIncludedFileInfo): CXIdxClientFile ## *
+    ppIncludedFile*: proc (client_data: CXClientData; a2: ptr CXIdxIncludedFileInfo): CXIdxClientFile {.cdecl.} ## *
                                                                                               ##  Called when a AST file (PCH or module) gets imported.
                                                                                               ##
                                                                                               ##  AST files will not get indexed (there will not be callbacks to index all
