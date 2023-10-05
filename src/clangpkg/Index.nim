@@ -1711,7 +1711,7 @@ type
     CXCursor_TypeAliasDecl = 36, ## * An Objective-C \@synthesize definition.
     CXCursor_ObjCSynthesizeDecl = 37, ## * An Objective-C \@dynamic definition.
     CXCursor_ObjCDynamicDecl = 38, ## * An access specifier.
-    CXCursor_CXXAccessSpecifier = 39, CXCursor_FirstRef = 40, ##  Decl references
+    CXCursor_CXXAccessSpecifier = 39, CXCursor_ObjCSuperClassRef = 40, ##  Decl references
     CXCursor_ObjCProtocolRef = 41, CXCursor_ObjCClassRef = 42, ## *
                                                          ##  A reference to a type declaration.
                                                          ##
@@ -1793,8 +1793,8 @@ type
                                   ##  A reference to a variable that occurs in some non-expression
                                   ##  context, e.g., a C++ lambda capture list.
                                   ##
-    CXCursor_VariableRef = 50, CXCursor_FirstInvalid = 70, CXCursor_NoDeclFound = 71,
-    CXCursor_NotImplemented = 72, CXCursor_InvalidCode = 73, CXCursor_FirstExpr = 100, ## *
+    CXCursor_VariableRef = 50, CXCursor_InvalidFile = 70, CXCursor_NoDeclFound = 71,
+    CXCursor_NotImplemented = 72, CXCursor_InvalidCode = 73, CXCursor_UnexposedExpr = 100, ## *
                                                                               ##  An expression whose specific kind is not exposed via this
                                                                               ##  interface.
                                                                               ##
@@ -1958,7 +1958,7 @@ type
     CXCursor_ObjCAvailabilityCheckExpr = 148, ## *
                                            ##  Fixed point literal
                                            ##
-    CXCursor_FixedPointLiteral = 149, CXCursor_FirstStmt = 200, ## *
+    CXCursor_FixedPointLiteral = 149, CXCursor_UnexposedStmt = 200, ## *
                                                           ##  A statement whose specific kind is not exposed via this
                                                           ##  interface.
                                                           ##
@@ -2140,7 +2140,7 @@ type
     CXCursor_OMPParallelMasterTaskLoopSimdDirective = 284, ## * OpenMP parallel master directive.
                                                         ##
     CXCursor_OMPParallelMasterDirective = 285, CXCursor_TranslationUnit = 300, ##  Attributes
-    CXCursor_FirstAttr = 400, ## *
+    CXCursor_UnexposedAttr = 400, ## *
                            ##  An attribute whose specific kind is not exposed via this
                            ##  interface.
                            ##
@@ -2178,16 +2178,16 @@ type
 const
   CXCursor_FirstDecl = CXCursor_UnexposedDecl
   CXCursor_LastDecl = CXCursor_CXXAccessSpecifier
-  CXCursor_ObjCSuperClassRef = CXCursor_FirstRef
+  CXCursor_FirstRef = CXCursor_ObjCSuperClassRef
   CXCursor_LastRef = CXCursor_VariableRef
-  CXCursor_InvalidFile = CXCursor_FirstInvalid
+  CXCursor_FirstInvalid = CXCursor_InvalidFile
   CXCursor_LastInvalid = CXCursor_InvalidCode
-  CXCursor_UnexposedExpr = CXCursor_FirstExpr
+  CXCursor_FirstExpr = CXCursor_UnexposedExpr
   CXCursor_LastExpr = CXCursor_FixedPointLiteral
-  CXCursor_UnexposedStmt = CXCursor_FirstStmt
+  CXCursor_FirstStmt = CXCursor_UnexposedStmt
   CXCursor_AsmStmt = CXCursor_GCCAsmStmt
   CXCursor_LastStmt = CXCursor_OMPParallelMasterDirective
-  CXCursor_UnexposedAttr = CXCursor_FirstAttr
+  CXCursor_FirstAttr = CXCursor_UnexposedAttr
   CXCursor_LastAttr = CXCursor_AlignedAttr
   CXCursor_MacroInstantiation = CXCursor_MacroExpansion
   CXCursor_FirstPreprocessing = CXCursor_PreprocessingDirective
