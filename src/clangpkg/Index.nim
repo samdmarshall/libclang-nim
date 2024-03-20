@@ -2826,7 +2826,8 @@ type
     CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout = 172,
     CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout = 173,
     CXType_OCLIntelSubgroupAVCImeSingleRefStreamin = 174,
-    CXType_OCLIntelSubgroupAVCImeDualRefStreamin = 175, CXType_ExtVector = 176
+    CXType_OCLIntelSubgroupAVCImeDualRefStreamin = 175, CXType_ExtVector = 176,
+    CXType_Atomic = 177, CXType_BTFTagAttributed = 178
 
 const
   CXType_FirstBuiltin = CXType_Void
@@ -3447,6 +3448,15 @@ proc Type_getOffsetOf*(T: CXType; S: cstring): clonglong {.
 
 proc Type_getModifiedType*(T: CXType): CXType {.
     importc: "clang_Type_getModifiedType", cdecl.}
+
+## *
+## Gets the type contained by this atomic type.
+##
+## If a non-atomic type is passed in, an invalid type is returned.
+##
+proc Type_getValueType*(CT: CXType): CXType {.
+    importc: "clang_Type_getValueType", cdecl.}
+
 ## *
 ##  Return the offset of the field represented by the Cursor.
 ##
