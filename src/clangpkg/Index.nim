@@ -2826,7 +2826,8 @@ type
     CXType_OCLIntelSubgroupAVCImeResultSingleRefStreamout = 172,
     CXType_OCLIntelSubgroupAVCImeResultDualRefStreamout = 173,
     CXType_OCLIntelSubgroupAVCImeSingleRefStreamin = 174,
-    CXType_OCLIntelSubgroupAVCImeDualRefStreamin = 175, CXType_ExtVector = 176
+    CXType_OCLIntelSubgroupAVCImeDualRefStreamin = 175, CXType_ExtVector = 176,
+    CXType_Atomic = 177, CXType_BTFTagAttributed = 178
 
 const
   CXType_FirstBuiltin = CXType_Void
@@ -3447,6 +3448,15 @@ proc Type_getOffsetOf*(T: CXType; S: cstring): clonglong {.
 
 proc Type_getModifiedType*(T: CXType): CXType {.
     importc: "clang_Type_getModifiedType", cdecl.}
+
+## *
+## Gets the type contained by this atomic type.
+##
+## If a non-atomic type is passed in, an invalid type is returned.
+##
+proc Type_getValueType*(CT: CXType): CXType {.
+    importc: "clang_Type_getValueType", cdecl.}
+
 ## *
 ##  Return the offset of the field represented by the Cursor.
 ##
@@ -3665,7 +3675,7 @@ type
 
 type
   CXCursorVisitor* = proc (cursor: CXCursor; parent: CXCursor;
-                        client_data: CXClientData): CXChildVisitResult
+                        client_data: CXClientData): CXChildVisitResult {.cdecl.}
 
 
 ## *
@@ -5515,7 +5525,7 @@ type                          ## *
     ##
   CXCursorAndRangeVisitor* {.bycopy.} = object
     context*: pointer
-    visit*: proc (context: pointer; a2: CXCursor; a3: CXSourceRange): CXVisitorResult
+    visit*: proc (context: pointer; a2: CXCursor; a3: CXSourceRange): CXVisitorResult {.cdecl.}
 
   CXResult* {.size: sizeof(cint).} = enum
     CXResult_Success = 0, ## *
@@ -5867,7 +5877,7 @@ type
                           reserved: pointer): CXIdxClientFile ## *
                                                            ##  Called when a file gets \#included/\#imported.
                                                            ##
-    ppIncludedFile*: proc (client_data: CXClientData; a2: ptr CXIdxIncludedFileInfo): CXIdxClientFile ## *
+    ppIncludedFile*: proc (client_data: CXClientData; a2: ptr CXIdxIncludedFileInfo): CXIdxClientFile {.cdecl.} ## *
                                                                                               ##  Called when a AST file (PCH or module) gets imported.
                                                                                               ##
                                                                                               ##  AST files will not get indexed (there will not be callbacks to index all
